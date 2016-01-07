@@ -14,7 +14,6 @@ readme_file = Dir.pwd() + '/' + readme_file
 puts "Parsing file #{readme_file}"
 
 template="
-# SilverStripe Continuous Integration Example
 [![Build Status](https://travis-ci.org/GITHUB_USERNAME/GITHUB_PROJECT_NAME.svg?branch=GIT_BRANCH)](https://travis-ci.org/GITHUB_USERNAME/GITHUB_PROJECT_NAME)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/badges/quality-score.png?b=GIT_BRANCH)](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/?branch=GIT_BRANCH)
 [![Code Coverage](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/badges/coverage.png?b=GIT_BRANCH)](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/?branch=GIT_BRANCH)
@@ -28,9 +27,9 @@ template="
 [![Monthly Downloads](https://poser.pugx.org/COMPOSER/d/monthly)](https://packagist.org/packages/COMPOSER)
 [![Daily Downloads](https://poser.pugx.org/COMPOSER/d/daily)](https://packagist.org/packages/COMPOSER)
 
-![codecov.io](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME/branch.svg?branch=GIT_BRANCH)
-"
+![codecov.io](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME/branch.svg?branch=GIT_BRANCH)"
 
+template.strip!
 branch = `git branch | grep '*'`
 branch = branch.split(' ')[1]
 template.gsub! 'GIT_BRANCH', branch
@@ -40,7 +39,7 @@ json = JSON.parse(file)
 composer_name = json['name']
 template.gsub! 'COMPOSER', composer_name
 
-git_url = `git remote -v | grep push`
+git_url = `git remote -v | grep push | grep origin`
 splits = git_url.split ':'
 path = splits[1]
 username = path.split('/')[0]
