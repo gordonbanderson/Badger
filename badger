@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'json'
+
+
+readme_file = 'README.md' #default
+
+#allow override by passing an argument
+readme_file = ARGV[0] if ARGV[0]
+
+readme_file = Dir.pwd() + '/' + readme_file
+
+puts "Parsing file #{readme_file}"
+
+template="
+# SilverStripe Continuous Integration Example
+[![Build Status](https://travis-ci.org/GITHUB_USERNAME/GITHUB_PROJECT_NAME.svg?branch=GIT_BRANCH)](https://travis-ci.org/GITHUB_USERNAME/GITHUB_PROJECT_NAME)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/badges/quality-score.png?b=GIT_BRANCH)](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/?branch=GIT_BRANCH)
+[![Code Coverage](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/badges/coverage.png?b=GIT_BRANCH)](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/?branch=GIT_BRANCH)
+[![Build Status](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/badges/build.png?b=GIT_BRANCH)](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/build-status/GIT_BRANCH)
+[![codecov.io](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME/coverage.svg?branch=GIT_BRANCH)](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME?branch=GIT_BRANCH)
+
+[![Latest Stable Version](https://poser.pugx.org/COMPOSER/version)](https://packagist.org/packages/COMPOSER)
+[![Latest Unstable Version](https://poser.pugx.org/COMPOSER/v/unstable)](//packagist.org/packages/COMPOSER)
+[![Total Downloads](https://poser.pugx.org/COMPOSER/downloads)](https://packagist.org/packages/COMPOSER)
+[![License](https://poser.pugx.org/COMPOSER/license)](https://packagist.org/packages/COMPOSER)
+[![Monthly Downloads](https://poser.pugx.org/COMPOSER/d/monthly)](https://packagist.org/packages/COMPOSER)
+[![Daily Downloads](https://poser.pugx.org/COMPOSER/d/daily)](https://packagist.org/packages/COMPOSER)
+
+![codecov.io](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME/branch.svg?branch=GIT_BRANCH)
+"
+
+branch = `git branch | grep '*'`
+branch = branch.split(' ')[1]
+template.gsub! 'GIT_BRANCH', branch
+
+file = File.read('composer.json')
+json = JSON.parse(file)
+composer_name = json['name']
+template.gsub! 'COMPOSER', composer_name
+
+git_url = `git remote -v | grep push`
+splits = git_url.split ':'
+path = splits[1]
+username = path.split('/')[0]
+project_name = path.split('/')[1]
+project_name = project_name.split('.git')[0]
+
+template.gsub! 'GITHUB_USERNAME', username
+template.gsub! 'GITHUB_PROJECT_NAME', project_name
+
+already_added_badges = false
+readme = ''
+File.readlines(readme_file).each do |line|
+
+	#filter out lines that were previously badges
+	keep_line = true
+	keep_line = !(
+					line.include?('poser.pugx.org') ||
+					line.include?('badges/quality-score.png') ||
+					line.include?('https://codecov.io') ||
+					line.include?('https://travis-ci.org') ||
+					line.include?('https://scrutinizer-ci.com')
+				)
+	if keep_line
+		readme << line
+	end
+
+	if line[0] == '#'
+		if !already_added_badges
+			readme << template
+			already_added_badges = true
+		end
+	end
+end
+
+File.open(readme_file, 'w') do |f2|
+  # use "\n" for two lines of text
+  f2.puts readme
+end
