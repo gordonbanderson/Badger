@@ -29,8 +29,11 @@ Packagist:
 * Copy `badger` to somewhere on the system path, e.g. `~/bin'
 
 ##Usage
+Firstly make sure that your README.md file is backed up.
 * Ensure that your code is backed up in Git.
 * `cd /path/to/module'
+* Ensure that your git remote with your project and username is called `origin`,
+this can be checked by executing `git remove -v`
 * `badger`
 
 That's it.  This will automatically take account of the current branch, name of
