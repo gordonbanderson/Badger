@@ -46,7 +46,20 @@ template.gsub! 'COMPOSER_COLON', with_colons
 template.gsub! 'COMPOSER', composer_name
 
 git_url = `git remote -v | grep push | grep origin`
-splits = git_url.split ':'
+
+# This needs to work for git URLs of the form 
+# * git@github.com:gordonbanderson/Badger.git
+# * https://github.com/gordonbanderson/Badger.git
+
+username = ''
+project_name = ''
+puts git_url[0,12]
+if git_url[0,12] == "origin\thttps"
+	splits = git_url.split 'https://github.com/'
+else
+	splits = git_url.split ':'
+end
+
 path = splits[1]
 username = path.split('/')[0]
 project_name = path.split('/')[1]
