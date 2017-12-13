@@ -1,5 +1,5 @@
-#Badger
-##Introduction
+# Badger
+## Introduction
 This Ruby script adds or replaced badges for a Composer based PHP project hosted
 on GitHub that is built with Travis and has code coverage.  It adds badges for
 the following:
@@ -24,11 +24,11 @@ Packagist:
 * Downloads this month
 * Downloads today
 
-##Install
+## Install
 * Install Ruby if it is not already available on your system
 * Copy `badger` to somewhere on the system path, e.g. `~/bin'
 
-##Usage
+## Usage
 Firstly make sure that your README.md file is backed up.
 * Ensure that your code is backed up in Git.
 * `cd /path/to/module'
@@ -43,5 +43,5 @@ composer project (from composer.json), GitHub username and project (from
 When a new branch is created simply run the script again.  It will replace
 badges from the previous branch.
 
-##Example
+## Example
 See https://github.com/gordonbanderson/silverstripe-elastica for a live example.
