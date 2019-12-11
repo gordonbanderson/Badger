@@ -15,9 +15,11 @@ puts "Parsing file #{readme_file}"
 template="
 [![Build Status](https://travis-ci.org/GITHUB_USERNAME/GITHUB_PROJECT_NAME.svg?branch=GIT_BRANCH)](https://travis-ci.org/GITHUB_USERNAME/GITHUB_PROJECT_NAME)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/badges/quality-score.png?b=GIT_BRANCH)](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/?branch=GIT_BRANCH)
-[![Code Coverage](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/badges/coverage.png?b=GIT_BRANCH)](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/?branch=GIT_BRANCH)
 [![Build Status](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/badges/build.png?b=GIT_BRANCH)](https://scrutinizer-ci.com/g/GITHUB_USERNAME/GITHUB_PROJECT_NAME/build-status/GIT_BRANCH)
+[![CircleCI](https://circleci.com/gh/GITHUB_USERNAME/GITHUB_PROJECT_NAME.svg?style=svg)](https://circleci.com/gh/GITHUB_USERNAME/GITHUB_PROJECT_NAME)
+
 [![codecov.io](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME/coverage.svg?branch=GIT_BRANCH)](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME?branch=GIT_BRANCH)
+
 
 [![Latest Stable Version](https://poser.pugx.org/COMPOSER/version)](https://packagist.org/packages/COMPOSER)
 [![Latest Unstable Version](https://poser.pugx.org/COMPOSER/v/unstable)](//packagist.org/packages/COMPOSER)
@@ -25,11 +27,16 @@ template="
 [![License](https://poser.pugx.org/COMPOSER/license)](https://packagist.org/packages/COMPOSER)
 [![Monthly Downloads](https://poser.pugx.org/COMPOSER/d/monthly)](https://packagist.org/packages/COMPOSER)
 [![Daily Downloads](https://poser.pugx.org/COMPOSER/d/daily)](https://packagist.org/packages/COMPOSER)
+[![composer.lock](https://poser.pugx.org/COMPOSER/composerlock)](https://packagist.org/packages/COMPOSER)
 
-[![Dependency Status](https://www.versioneye.com/php/COMPOSER_COLON/badge.svg)](https://www.versioneye.com/php/COMPOSER_COLON)
-[![Reference Status](https://www.versioneye.com/php/COMPOSER_COLON/reference_badge.svg?style=flat)](https://www.versioneye.com/php/COMPOSER_COLON/references)
+[![GitHub Code Size](https://img.shields.io/github/languages/code-size/GITHUB_USERNAME/GITHUB_PROJECT_NAME)](https://github.com/GITHUB_USERNAME/GITHUB_PROJECT_NAME)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/GITHUB_USERNAME/GITHUB_PROJECT_NAME)](https://github.com/GITHUB_USERNAME/GITHUB_PROJECT_NAME)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/GITHUB_USERNAME/GITHUB_PROJECT_NAME)](https://github.com/GITHUB_USERNAME/GITHUB_PROJECT_NAME)
+[![GitHub Activity](https://img.shields.io/github/commit-activity/m/GITHUB_USERNAME/GITHUB_PROJECT_NAME)](https://github.com/GITHUB_USERNAME/GITHUB_PROJECT_NAME)
+[![GitHub Issues](https://img.shields.io/github/issues/GITHUB_USERNAME/GITHUB_PROJECT_NAME)](https://github.com/GITHUB_USERNAME/GITHUB_PROJECT_NAME/issues)
 
-![codecov.io](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME/branch.svg?branch=GIT_BRANCH)"
+![codecov.io](https://codecov.io/github/GITHUB_USERNAME/GITHUB_PROJECT_NAME/branch.svg?branch=GIT_BRANCH)
+"
 
 template.strip!
 branch = `git branch | grep '*'`
